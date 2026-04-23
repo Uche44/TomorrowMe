@@ -1,0 +1,47 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Databases (runtime data)
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated audio output
+audio_files/
+assets/music/
+assets/sfx/
+
+# Duplicate nested folder created by tooling error
+backend/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
