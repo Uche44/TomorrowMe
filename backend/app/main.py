@@ -1,5 +1,19 @@
 import logging
+import os
 from contextlib import asynccontextmanager
+
+# Point pydub at the bundled ffmpeg binary (no system install needed on Render)
+try:
+    import imageio_ffmpeg
+    _ffmpeg_path = imageio_ffmpeg.get_ffmpeg_exe()
+    os.environ.setdefault("PATH", "")
+    os.environ["PATH"] = os.path.dirname(_ffmpeg_path) + os.pathsep + os.environ["PATH"]
+    from pydub import AudioSegment
+    AudioSegment.converter = _ffmpeg_path
+    AudioSegment.ffmpeg = _ffmpeg_path
+    AudioSegment.ffprobe = _ffmpeg_path.replace("ffmpeg", "ffprobe")
+except Exception:
+    pass  # ffmpeg not available — audio processing will fail gracefully at runtime
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
