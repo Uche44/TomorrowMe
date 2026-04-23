@@ -14,10 +14,14 @@ from pydantic import BaseModel, Field
 
 from app.config import settings
 
+import os
+
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-BASE = "http://localhost:8000"  # self-referential — all modules on same server
+# On Render the service calls itself via localhost on the PORT env var
+_PORT = os.environ.get("PORT", "8000")
+BASE = f"http://localhost:{_PORT}"
 
 
 class GenerateRequest(BaseModel):
